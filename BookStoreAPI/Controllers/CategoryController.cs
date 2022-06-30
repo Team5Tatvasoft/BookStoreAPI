@@ -8,12 +8,15 @@ namespace BookStoreApi.Controllers
 {
     [Route("api/category")]
     [ApiController]
+   
     public class CategoryController : ControllerBase
     {
         CategoryRepository _categoryRepository = new CategoryRepository();
 
         [Route("list")]
         [HttpGet]
+        [ProducesResponseType(typeof(ListResponse<CategoryModel>), (int)HttpStatusCode.OK)]
+       
         public IActionResult GetCategories(string? keyword, int pageIndex = 0, int pageSize = 10)
         {
 
@@ -38,6 +41,8 @@ namespace BookStoreApi.Controllers
 
         [Route("{id}")]
         [HttpGet]
+        [ProducesResponseType(typeof(ListResponse<CategoryModel>), (int)HttpStatusCode.OK)]
+      
         public IActionResult GetCategory(int id)
         {
             try
@@ -56,6 +61,9 @@ namespace BookStoreApi.Controllers
 
         [Route("add")]
         [HttpPost]
+        [ProducesResponseType(typeof(ListResponse<CategoryModel>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(ListResponse<CategoryModel>), (int)HttpStatusCode.BadRequest)]
+
         public IActionResult AddCategory(CategoryModel categoryModel)
         {
             try
@@ -80,6 +88,9 @@ namespace BookStoreApi.Controllers
 
         [Route("update")]
         [HttpPut]
+        [ProducesResponseType(typeof(ListResponse<CategoryModel>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(ListResponse<CategoryModel>), (int)HttpStatusCode.BadRequest)]
+
         public IActionResult UpdateCategory(CategoryModel categoryModel)
         {
             try
@@ -106,6 +117,9 @@ namespace BookStoreApi.Controllers
 
         [Route("delete/{id}")]
         [HttpDelete]
+        [ProducesResponseType(typeof(ListResponse<CategoryModel>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(ListResponse<CategoryModel>), (int)HttpStatusCode.BadRequest)]
+
         public IActionResult DeleteCategory(int id)
         {
             var response = _categoryRepository.DeleteCategory(id);
